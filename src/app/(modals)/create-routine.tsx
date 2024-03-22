@@ -1,8 +1,20 @@
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { Styles } from "@/constants/styles";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/stores/store";
 
 export default function CreateRoutine() {
+  const routines = useSelector((state: RootState) => state.content.routines);
+  const dispatch = useDispatch();
+
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+
+  const handleCreate = () => {
+    // dispatch();
+  };
+
   return (
     <View style={Styles.screenContainer}>
       <View style={Styles.form}>

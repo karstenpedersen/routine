@@ -1,8 +1,9 @@
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+import store from "@/stores/store";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import { Provider } from "react-redux";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -44,19 +45,21 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   return (
-    <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen
-        name="(modals)/create-routine"
-        options={{
-          title: "Create Routine",
-          headerTitleStyle: {
-            fontFamily: "mon-sb",
-          },
-          presentation: "modal",
-        }}
-      />
-      <Stack.Screen name="routine/[id]" options={{ headerShown: false }} />
-    </Stack>
+    <Provider store={store}>
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="(modals)/create-routine"
+          options={{
+            title: "Create Routine",
+            headerTitleStyle: {
+              fontFamily: "mon-sb",
+            },
+            presentation: "modal",
+          }}
+        />
+        <Stack.Screen name="routine/[id]" options={{ headerShown: false }} />
+      </Stack>
+    </Provider>
   );
 }

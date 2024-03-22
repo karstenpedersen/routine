@@ -3,7 +3,7 @@ import React, { useMemo } from "react";
 import { Routine } from "@/types/routine";
 import { useRouter } from "expo-router";
 import RoutineTaskBar from "./RoutineTaskBar";
-import { Colors } from "@/constants/colors";
+import PALETTE from "@/constants/palette";
 import { Styles } from "@/constants/styles";
 
 type Props = {
@@ -64,6 +64,6 @@ const styles = StyleSheet.create({
   time: {
     fontFamily: "mon-b",
     fontSize: 18,
-    color: Colors.primary,
+    color: PALETTE.primary,
   },
 });

@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
-import { Colors } from "./colors";
+import PALETTE from "./palette";
 
-export const SefaultStyles = {
+export const DefaultStyles = {
   inputBorderRadius: 8,
 };
 
@@ -15,14 +15,14 @@ export const Styles = StyleSheet.create({
     minHeight: 44,
     borderWidth: 1,
     borderColor: "#ABABAB",
-    borderRadius: SefaultStyles.inputBorderRadius,
+    borderRadius: DefaultStyles.inputBorderRadius,
     padding: 10,
     backgroundColor: "#ffffff",
   },
   button: {
     height: 50,
-    backgroundColor: Colors.primary,
-    borderRadius: SefaultStyles.inputBorderRadius,
+    backgroundColor: PALETTE.primary.DEFAULT,
+    borderRadius: DefaultStyles.inputBorderRadius,
     justifyContent: "center",
     alignItems: "center",
   },

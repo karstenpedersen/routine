@@ -1,4 +1,5 @@
 export type RoutineTask = {
+  id: string;
   title: string;
   description?: string;
   subtasks?: RoutineTask[];
@@ -7,7 +8,7 @@ export type RoutineTask = {
 };
 
 export type Routine = {
-  id: number;
+  id: string;
   title: string;
   description?: string;
   tasks: RoutineTask[];
