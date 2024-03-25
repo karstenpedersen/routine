@@ -3,7 +3,9 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Provider } from "react-redux";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -46,20 +48,21 @@ export default function RootLayout() {
 function RootLayoutNav() {
   return (
     <Provider store={store}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen
+      <GestureHandlerRootView style={{ flex: 1, flexGrow: 1 }}>
+        <BottomSheetModalProvider>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            {/* <Stack.Screen
           name="(modals)/create-routine"
           options={{
-            title: "Create Routine",
-            headerTitleStyle: {
-              fontFamily: "mon-sb",
-            },
+            headerShown: false,
             presentation: "modal",
           }}
-        />
-        <Stack.Screen name="routine/[id]" options={{ headerShown: false }} />
-      </Stack>
+        /> */}
+            <Stack.Screen name="routine" options={{ headerShown: false }} />
+          </Stack>
+        </BottomSheetModalProvider>
+      </GestureHandlerRootView>
     </Provider>
   );
 }

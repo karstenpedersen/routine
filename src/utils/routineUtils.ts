@@ -5,5 +5,9 @@ export function findRoutine(id: string, routines: Routine[]) {
 }
 
 export function findTask(id: string, routine: Routine) {
+  if (!routine.tasks) {
+    return undefined;
+  }
+
   return routine.tasks.find((task) => task.id === id);
 }

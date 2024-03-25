@@ -1,45 +1,56 @@
-import BottomModal from "@/components/BottomModal";
 import Button from "@/components/input/Button";
 import DateTimePickerButton from "@/components/input/DateTimePickerButton";
 import InputContainer from "@/components/input/InputContainer";
 import TextField from "@/components/input/TextField";
 import PageShell from "@/components/page/PageShell";
 import PageTitle from "@/components/page/PageTitle";
-import RoutineTaskTemplateList from "@/components/routine/RoutineTaskTemplateList";
+import TwoButtons from "@/components/ui/TwoButtons";
 import { RootState } from "@/stores/store";
-import { RoutineTaskTemplate } from "@/types/routine";
-import { useRouter } from "expo-router";
-import React, { useState } from "react";
+import { Routine, RoutineTask } from "@/types/routine";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import React, { useMemo, useState } from "react";
 import { Text, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function CreateRoutine() {
+export default function Page() {
+  const { id } = useLocalSearchParams<{ id: string }>();
   const routines = useSelector((state: RootState) => state.content.routines);
   const dispatch = useDispatch();
   const router = useRouter();
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [tasks, setTasks] = useState<RoutineTaskTemplate[]>([
-    {
-      title: "Hello",
-      duration: 300,
-    },
-    {
-      title: "World",
-      duration: 300,
-    },
-  ]);
+  const [tasks, setTasks] = useState<RoutineTask[]>([]);
   const [reminder, setReminder] = useState<Date | undefined>();
 
-  const handleCreate = () => {
-    // CREATE ROUTINE
+  const handleSave = () => {
+    const routine: Routine = {
+      id: "TODO",
+      title,
+      description,
+      tasks,
+      reminder,
+    };
+
     // dispatch();
     router.back();
   };
 
+  const handleCancel = () => {
+    router.back();
+  };
+
+  const routine: Routine = useMemo(() => {
+    return {
+      id: "1",
+      tasks: [],
+      title: "Morning Routine",
+      description: "Very good morning routine.",
+    };
+  }, [id]);
+
   return (
-    <PageShell top={<PageTitle title="Create Routine" showBackButton />}>
+    <PageShell top={<PageTitle title="Edit Routine" showBackButton />}>
       <InputContainer>
         <TextField
           title="Title"
@@ -55,6 +66,7 @@ export default function CreateRoutine() {
           setValue={setDescription}
           maxLength={256}
         />
+
         <View>
           <Text>Reminder</Text>
           <DateTimePickerButton
@@ -63,13 +75,19 @@ export default function CreateRoutine() {
             setValue={setReminder}
           />
         </View>
+
         <View>
-          <Text>
-            {tasks.length} task{tasks.length === 1 ? "" : "s"}
-          </Text>
-          <RoutineTaskTemplateList tasks={tasks} setTasks={setTasks} />
+          <Text>Tasks</Text>
+          <DateTimePickerButton
+            placeholder="Add Reminder"
+            value={reminder}
+            setValue={setReminder}
+          />
         </View>
-        <Button text="Create Routine" onPress={handleCreate} />
+        <TwoButtons>
+          <Button text="Cancel" onPress={handleSave} />
+          <Button text="Update" onPress={handleSave} />
+        </TwoButtons>
       </InputContainer>
     </PageShell>
   );

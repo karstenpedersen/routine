@@ -1,6 +1,7 @@
 import React from "react";
 import { Tabs } from "expo-router";
 import TabBarIcon from "@/components/TabBarIcon";
+import { CheckIcon, PlusIcon, UserIcon } from "lucide-react-native";
 
 export default function TabLayout() {
   return (
@@ -10,29 +11,36 @@ export default function TabLayout() {
         tabBarLabelStyle: {
           fontFamily: "mon-sb",
         },
+        tabBarShowLabel: false,
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
+          headerShown: false,
           tabBarLabel: "Routines",
-          tabBarIcon: ({ color }) => <TabBarIcon name="check" color={color} />,
+          tabBarIcon: ({ size, color }) => (
+            <CheckIcon size={size} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
         name="create-routine"
         options={{
+          headerShown: false,
           tabBarLabel: "New",
-          tabBarIcon: ({ color }) => <TabBarIcon name="plus" color={color} />,
-          href: "(modals)/create-routine"
+          tabBarIcon: ({ size, color }) => (
+            <PlusIcon size={size} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
         name="insight"
         options={{
-          tabBarLabel: "Insight",
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="bar-chart" color={color} />
+          headerShown: false,
+          tabBarLabel: "Profile",
+          tabBarIcon: ({ size, color }) => (
+            <UserIcon size={size} color={color} />
           ),
         }}
       />

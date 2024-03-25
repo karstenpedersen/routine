@@ -1,14 +1,13 @@
-import { View, Text } from "react-native";
 import React from "react";
 import RoutineList from "@/components/routine/RoutineList";
 import routines from "@/data/routines";
-import { Styles } from "@/constants/styles";
+import PageTitle from "@/components/page/PageTitle";
+import PageShell from "@/components/page/PageShell";
 
 export default function Routines() {
   return (
-    <View style={Styles.screenContainer}>
-      <Text style={Styles.heading}>Routines</Text>
+    <PageShell top={<PageTitle title="Routines" />}>
       <RoutineList routines={routines} />
-    </View>
+    </PageShell>
   );
 }

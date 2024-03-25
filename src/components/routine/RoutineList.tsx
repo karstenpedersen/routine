@@ -1,6 +1,6 @@
-import { StyleSheet, View } from "react-native";
-import React from "react";
 import { Routine } from "@/types/routine";
+import React from "react";
+import { FlatList, Text } from "react-native";
 import RoutineItem from "./RoutineItem";
 
 type Props = {
@@ -8,19 +8,16 @@ type Props = {
 };
 
 export default function RoutineList({ routines }: Props) {
+  const renderItem = ({ item }: { item: Routine }) => {
+    return <RoutineItem routine={item} />;
+  };
+
   return (
-    <View style={styles.container}>
-      {routines.map((routine) => (
-        <RoutineItem key={routine.id} routine={routine} />
-      ))}
-    </View>
+    <FlatList
+      data={routines}
+      renderItem={renderItem}
+      ListEmptyComponent={<Text>No routines...</Text>}
+      contentContainerStyle={{ gap: 18 }}
+    />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    gap: 8,
-  },
-});
